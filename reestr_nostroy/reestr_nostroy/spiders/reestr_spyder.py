@@ -8,7 +8,7 @@ from reestr_nostroy.items import (CertificatesItem, ReestrNostroyItem,
                                   RegistrationDatesItem, RightsItem)
 
 
-def get_list_of_inns() -> list:
+def get_list_of_inns():
     settings = get_project_settings()
     input_file = os.path.join(settings.get('BASE_DIR'), 'inns.txt')
     with open(input_file, 'r') as file:
@@ -22,7 +22,7 @@ class ReestrSpider(scrapy.Spider):
         'reestr.nostroy.ru'
     ]
     inns = get_list_of_inns()
-    # inns = ['770965012811']
+    # inns = ['2308111839']
     start_urls = [
         f'https://reestr.nostroy.ru/reestr?m.inn={inns[0]}',
     ]
@@ -108,14 +108,24 @@ class ReestrSpider(scrapy.Spider):
         table = response.xpath(
             '//*[@id="filter_form"]//table//tbody//tr//td//text()'
         ).getall()[54:]
-        y = 0
-        while y < len(table):
+        clear_table = []
+        for element in table:
+            if element.strip():
+                clear_table.append(element.strip())
+        counter = 0
+        while counter < len(clear_table):
+            bach = clear_table[counter:counter+7]
             loader = ItemLoader(item=CertificatesItem(), selector=selector)
-            bach = table[y:y+16]
-            loader.add_value('certificate_number', bach[2])
-            loader.add_value('certificate_issued_date', bach[4])
-            loader.add_value('max_price_per_one_contract', bach[6])
-            loader.add_value('certificate_status', bach[8])
+            loader.add_value('certificate_number', bach[1])
+            loader.add_value('certificate_issued_date', bach[2])
             loader.add_value('uid', response.meta['uid'])
-            y += 16
-            yield loader.load_item()
+            if clear_table[counter+5] == 'Загрузка...':
+                loader.add_value('max_price_per_one_contract', None)
+                loader.add_value('certificate_status', bach[4])
+                counter += 7
+                yield loader.load_item()
+            else:
+                loader.add_value('max_price_per_one_contract', bach[4])
+                loader.add_value('certificate_status', bach[5])
+                counter += 8
+                yield loader.load_item()

@@ -7,8 +7,8 @@ from scrapy.item import Field, Item
 
 def remove_service_characters(list_of_all_characters):
     text = ' '.join(map(str.strip, list_of_all_characters))
-    text = re.sub('\\t|\\n|\\r|&downarrow;|№|#|\\"|\'', '', text)
-    return text
+    text = re.sub('\\t|\\n|\\r|&downarrow;|№|#|\\"|\'|«|»', '', text)
+    return text.strip()
 
 
 def create_uid(text):

@@ -15,7 +15,7 @@ NEWSPIDER_MODULE = 'reestr_nostroy.spiders'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SQLite
-CONNECTION_STRING = 'sqlite:///reestr.db'
+CONNECTION_STRING = 'sqlite:///../reestr.db'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'reestr_nostroy (+http://www.yourdomain.com)'
