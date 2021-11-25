@@ -6,6 +6,15 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 
+def get_list_of_inns():
+    settings = get_project_settings()
+    input_file = os.path.join(os.path.join(settings.get('BASE_DIR'),
+                                           'input'), 'inns.txt')
+    with open(input_file, 'r') as file:
+        incoming_inns = file.read().splitlines()
+    return incoming_inns
+
+
 def results_to_csv():
     engine = create_engine(get_project_settings().get('CONNECTION_STRING'))
     session = sessionmaker()
@@ -26,7 +35,7 @@ def results_to_csv():
                                   how='right')
 
     final_df.reset_index(inplace=True)
-    final_df.index += 1
+    final_df.index = final_df.index + 1
     final_df.drop(columns=['uid', 'full_name_of_sro_member', 'ogrn'],
                   inplace=True)
 
@@ -51,7 +60,8 @@ def results_to_csv():
     final_df.set_index('№ п/п', inplace=True)
 
     base_dir = get_project_settings().get('BASE_DIR')
-    final_csv_path = os.path.join(base_dir, '../output/reestr.csv')
+    final_csv_path = os.path.join(os.path.join(base_dir, 'output'),
+                                  'reestr.csv')
 
     with open(final_csv_path, 'wb') as file:
         final_df.to_csv(path_or_buf=file)

@@ -16,11 +16,10 @@ NEWSPIDER_MODULE = 'reestr_nostroy.spiders'
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SQLite
-DB_PATH = os.path.join(BASE_DIR, 'output/reestr_nostroy.db')
+DB_PATH = os.path.join(os.path.join(BASE_DIR, 'output'), 'reestr_nostroy.db')
 CONNECTION_STRING = f'sqlite:///{DB_PATH}'
 
-LOG_FILE = os.path.join(BASE_DIR, 'output/logs.log')
-
+LOG_FILE = os.path.join(os.path.join(BASE_DIR, 'output'), 'logs.log')
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'reestr_nostroy (+http://www.yourdomain.com)'
 

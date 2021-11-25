@@ -1,19 +1,9 @@
-import os
-
 import scrapy
 from scrapy.loader import ItemLoader
-from scrapy.utils.project import get_project_settings
 
 from reestr_nostroy.items import (CertificatesItem, ReestrNostroyItem,
                                   RegistrationDatesItem, RightsItem)
-
-
-def get_list_of_inns():
-    settings = get_project_settings()
-    input_file = os.path.join(settings.get('BASE_DIR'), 'input/inns.txt')
-    with open(input_file, 'r') as file:
-        incoming_inns = file.read().splitlines()
-    return incoming_inns
+from reestr_nostroy.utils import get_list_of_inns
 
 
 class ReestrSpider(scrapy.Spider):
