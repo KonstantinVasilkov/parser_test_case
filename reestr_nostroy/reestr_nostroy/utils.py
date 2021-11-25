@@ -51,7 +51,7 @@ def results_to_csv():
     final_df.set_index('№ п/п', inplace=True)
 
     base_dir = get_project_settings().get('BASE_DIR')
-    final_csv_path = os.path.join(base_dir, 'output/reestr.csv')
+    final_csv_path = os.path.join(base_dir, '../output/reestr.csv')
 
     with open(final_csv_path, 'wb') as file:
         final_df.to_csv(path_or_buf=file)

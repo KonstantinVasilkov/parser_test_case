@@ -1,6 +1,6 @@
 from scrapy.crawler import CrawlerProcess
 from scrapy.utils.project import get_project_settings
-from utils import results_to_csv
+from reestr_nostroy.utils import results_to_csv
 
 from reestr_nostroy.spiders.reestr_spyder import ReestrSpider
 
