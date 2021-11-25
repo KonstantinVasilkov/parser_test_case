@@ -10,7 +10,7 @@ from reestr_nostroy.items import (CertificatesItem, ReestrNostroyItem,
 
 def get_list_of_inns():
     settings = get_project_settings()
-    input_file = os.path.join(settings.get('BASE_DIR'), 'inns.txt')
+    input_file = os.path.join(settings.get('BASE_DIR'), 'input/inns.txt')
     with open(input_file, 'r') as file:
         incoming_inns = file.read().splitlines()
     return incoming_inns
@@ -22,7 +22,6 @@ class ReestrSpider(scrapy.Spider):
         'reestr.nostroy.ru'
     ]
     inns = get_list_of_inns()
-    # inns = ['2308111839']
     start_urls = [
         f'https://reestr.nostroy.ru/reestr?m.inn={inns[0]}',
     ]

@@ -1,6 +1,6 @@
 from scrapy.utils.project import get_project_settings
-from sqlalchemy import (Column, DateTime, ForeignKey,
-                        Integer, Text, create_engine)
+from sqlalchemy import (Column, DateTime, ForeignKey, Integer, Text,
+                        create_engine)
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
@@ -17,7 +17,7 @@ def create_table(engine):
 class Reestr(Base):
     __tablename__ = 'reestr'
 
-    uid = Column('UID', Integer(), unique=True, primary_key=True)
+    uid = Column('uid', Integer(), unique=True, primary_key=True)
     full_name_of_sro_member = Column('full_name_of_sro_member', Text())
     short_name_of_sro_member = Column('short_name_of_sro_member', Text())
     inn = Column('inn', Text())
@@ -31,7 +31,7 @@ class RegistrationDates(Base):
     __tablename__ = 'registration_dates'
 
     id = Column(Integer, primary_key=True)
-    uid = Column(Integer, ForeignKey('reestr.UID'))
+    uid = Column(Integer, ForeignKey('reestr.uid'))
     start_date = Column('start_date', DateTime)
     end_date = Column('end_date', DateTime, nullable=True)
 
@@ -40,7 +40,7 @@ class Rights(Base):
     __tablename__ = 'rights'
 
     id = Column(Integer, primary_key=True)
-    uid = Column(Integer, ForeignKey('reestr.UID'))
+    uid = Column(Integer, ForeignKey('reestr.uid'))
     max_price_per_one_contract = Column('max_price_per_one_contract', Text())
     size_of_obligations = Column('size_of_obligations', Text())
     date_of_suspension = Column('date_of_suspension', DateTime)
@@ -51,7 +51,7 @@ class Certificates(Base):
     __tablename__ = 'certificates'
 
     id = Column(Integer, primary_key=True)
-    uid = Column(Integer, ForeignKey('reestr.UID'))
+    uid = Column(Integer, ForeignKey('reestr.uid'))
     certificate_number = Column('certificate_number', Text())
     certificate_issued_date = Column('certificate_issued_date', DateTime)
     max_price_per_one_contract = Column('max_price_per_one_contract', Text())

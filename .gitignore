@@ -134,3 +134,5 @@ dmypy.json
 NOTES.txt
 *.db
 inns.txt
+*.csv
+logs.log

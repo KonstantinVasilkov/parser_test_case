@@ -14,8 +14,12 @@ SPIDER_MODULES = ['reestr_nostroy.spiders']
 NEWSPIDER_MODULE = 'reestr_nostroy.spiders'
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # SQLite
-CONNECTION_STRING = 'sqlite:///../reestr.db'
+DB_PATH = os.path.join(BASE_DIR, 'output/reestr_nostroy.db')
+CONNECTION_STRING = f'sqlite:///{DB_PATH}'
+
+LOG_FILE = os.path.join(BASE_DIR, 'output/logs.log')
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 # USER_AGENT = 'reestr_nostroy (+http://www.yourdomain.com)'
@@ -39,6 +43,7 @@ COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
 # TELNETCONSOLE_ENABLED = False
+
 
 # Override the default request headers:
 # DEFAULT_REQUEST_HEADERS = {
