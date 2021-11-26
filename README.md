@@ -23,7 +23,7 @@
 
 ## Разворачивание проекта
 Клонировать репозиторий:
-> $ git@github.com:KonstantinVasilkov/parser_test_case.git
+> $ git clone git@github.com:KonstantinVasilkov/parser_test_case.git
 
 Перейти в папку проекта:
 > $ cd ./parser_test_case
