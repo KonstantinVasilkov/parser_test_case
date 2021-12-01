@@ -36,7 +36,8 @@ def results_to_csv():
 
     final_df.reset_index(inplace=True)
     final_df.index = final_df.index + 1
-    final_df.drop(columns=['uid', 'full_name_of_sro_member', 'ogrn'],
+    final_df.drop(columns=['uid', 'full_name_of_sro_member', 'ogrn',
+                           'comments'],
                   inplace=True)
 
     new_columns_names = ['№ п/п',

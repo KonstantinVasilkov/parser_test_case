@@ -156,12 +156,22 @@
         {% endfor %}
     </table>
 </div>
+{% if card[0].comments %}
 <div class="container py-xl-5">
-    <a class="btn btn-primary" href="#">
+    <h5>Комментарии к карточке:</h5>
+    {{ card[0].comments }}
+</div>
+{% endif %}
+<div class="container py-xl-5">
+    <a class="btn btn-primary" href="/modify/{{ card[0].uid }}">
         Редактировать запись
     </a>
-    <a class="btn btn-primary" href="#">
-        Удалить запись
-    </a>
+    <hr>
+    <form class="col-md-12"
+          action="{{ url_for('delete', uid=card[0].uid) }}" method="post">
+        <button class="btn btn-primary">
+            Удалить запись
+        </button>
+    </form>
 </div>
 {% endblock %}

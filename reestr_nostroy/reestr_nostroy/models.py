@@ -32,7 +32,7 @@ class RegistrationDates(Base):
     __tablename__ = 'registration_dates'
 
     id = Column(Integer, primary_key=True)
-    uid = Column(Integer, ForeignKey('reestr.uid'))
+    uid = Column(Integer, ForeignKey('reestr.uid', ondelete='CASCADE'))
     start_date = Column('start_date', DateTime)
     end_date = Column('end_date', DateTime, nullable=True)
 
@@ -41,7 +41,7 @@ class Rights(Base):
     __tablename__ = 'rights'
 
     id = Column(Integer, primary_key=True)
-    uid = Column(Integer, ForeignKey('reestr.uid'))
+    uid = Column(Integer, ForeignKey('reestr.uid', ondelete='CASCADE'))
     max_price_per_one_contract = Column('max_price_per_one_contract', Text())
     size_of_obligations = Column('size_of_obligations', Text())
     date_of_suspension = Column('date_of_suspension', DateTime)
@@ -52,7 +52,7 @@ class Certificates(Base):
     __tablename__ = 'certificates'
 
     id = Column(Integer, primary_key=True)
-    uid = Column(Integer, ForeignKey('reestr.uid'))
+    uid = Column(Integer, ForeignKey('reestr.uid', ondelete='CASCADE'))
     certificate_number = Column('certificate_number', Text())
     certificate_issued_date = Column('certificate_issued_date', DateTime)
     max_price_per_one_contract = Column('max_price_per_one_contract', Text())

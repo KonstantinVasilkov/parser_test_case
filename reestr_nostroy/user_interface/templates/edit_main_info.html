@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>
+    Редактирование карточки предприятия {{ card[0].short_name_of_sro_member }}
+</title>
+{% endblock %}
+
+{% block body %}
+<h1>
+    Редактирование карточки предприятия {{ card[0].short_name_of_sro_member }}
+</h1>
+<div class="form-outline">
+    <div class="card-header">Изменение записи в базе</div>
+    <form class="col-md-12" action="{{ url_for('modify_main_info', uid=card[0].uid) }}"
+    method="post">
+        <hr>
+        {{ form.company_short_name.label }}
+        {% if form.company_short_name.errors %}
+        <ul class="errors">
+            {% for error in form.company_short_name.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.company_short_name() }}
+        <hr>
+        {{ form.company_inn.label }}
+        {% if form.company_inn.errors %}
+        <ul class="errors">
+            {% for error in form.company_inn.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.company_inn() }}
+        <hr>
+        {{ form.sro_reg_number.label }}
+        {% if form.sro_reg_number.errors %}
+        <ul class="errors">
+            {% for error in form.sro_reg_number.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.sro_reg_number() }}
+        <hr>
+        {{ form.sro_start_date.label }}
+        {% if form.sro_start_date.errors %}
+        <ul class="errors">
+            {% for error in form.sro_start_date.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.sro_start_date() }}
+        <hr>
+        {{ form.sro_end_date.label }}
+        {% if form.sro_end_date.errors %}
+        <ul class="errors">
+            {% for error in form.sro_end_date.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.sro_end_date() }}
+        <hr>
+        {{ form.sro_status.label }}
+        {% if form.sro_status.errors %}
+        <ul class="errors">
+            {% for error in form.sro_status.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.sro_status() }}
+        <hr>
+        {{ form.comments.label }}
+        {% if form.comments.errors %}
+        <ul class="errors">
+            {% for error in form.comments.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {{ form.comments() }}
+        {{ form.csrf_token() }}
+        <hr>
+        <button class="btn btn-primary" >
+            Сохранить изменения
+        </button>
+    </form>
+</div>
+{% endblock %}
