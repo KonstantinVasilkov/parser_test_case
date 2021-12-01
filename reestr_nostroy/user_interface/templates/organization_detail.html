@@ -1,0 +1,167 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>
+    Карточка предприятия {{ card[0].short_name_of_sro_member }}
+</title>
+{% endblock %}
+
+{% block body %}
+<h1>
+    Карточка предприятия {{ card[0].short_name_of_sro_member }}
+</h1>
+<div class="container py-5">
+    <br>
+    <table id="main_info" class="table table-striped">
+        <thead class="thead-dark text-decoration-underline">
+        <tr>
+            <th scope="col">
+                Название организации
+            </th>
+            <th scope="col">
+                ИНН организации
+            </th>
+            <th scope="col">
+                ОГРН организации
+            </th>
+            <th scope="col">
+                Регистрационный номер в СРО
+            </th>
+            <th scope="col">
+                Дата регистрации в СРО
+            </th>
+            <th scope="col">
+                Дата исключения из СРО
+            </th>
+            <th scope="col">
+                Статус членства в СРО
+            </th>
+        </tr>
+        </thead>
+        <tr>
+            <th>
+                {{ card[0].full_name_of_sro_member }}
+            </th>
+            <th>
+                {{ card[0].inn }}
+            </th>
+            <th>
+                {{ card[0].ogrn }}
+            </th>
+            <th>
+                {{ card[0].sro_registration_number }}
+            </th>
+            <th>
+                {{ card[0].start_date|dt }}
+            </th>
+            <th>
+                {% if card[0].end_date %}
+                {{ card[0].end_date|dt }}
+                {% else %}
+                ---
+                {% endif %}
+            </th>
+            <th>
+                {{ card[0].status }}
+            </th>
+        </tr>
+    </table>
+</div>
+<div class="container py-lg-0">
+    <h3>Сведения о наличии права</h3>
+    <hr>
+    <table id="rights" class="table">
+        <tr>
+            <th>
+                Стоимость работ по одному договору строительного подряда
+                (уровень ответственности):
+            </th>
+            <th>
+                {% if card[0].max_price_per_one_contract %}
+                {{ card[0].max_price_per_one_contract }}
+                {% else %}
+                Сведения не предоставлены
+                {% endif %}
+            </th>
+        </tr>
+        <tr>
+            <th>
+                Размер обязательств по договорам строительного подряда,
+                заключенным
+                с использованием конкурентных способов заключения договоров
+                (уровень ответственности):
+            </th>
+            <th>
+                {% if card[0].size_of_obligations %}
+                {{ card[0].size_of_obligations }}
+                {% else %}
+                Сведения не предоставлены
+                {% endif %}
+            </th>
+        </tr>
+    </table>
+</div>
+<br><br><br><br>
+<div class="container py-lg-0">
+    <h3>Сведения о выданных свидетельствах</h3>
+    <hr>
+    <table id="rights" class="table table-striped">
+        <thead class="thead-dark text-decoration-underline">
+        <tr>
+            <th>
+                Номер свидетельства
+            </th>
+            <th>
+                Дата выдачи свидетельства
+            </th>
+            <th>
+                Статус свидетельства
+            </th>
+            <th>
+                Стоимость работ по одному договору ГП
+            </th>
+        </tr>
+        </thead>
+        {% for line in card %}
+        <tr>
+            <th>
+                {% if line.certificate_number %}
+                {{ line.certificate_number }}
+                {% else %}
+                Сведения не предоставлены
+                {% endif %}
+            </th>
+            <th>
+                {% if line.certificate_issued_date|dt %}
+                {{ line.certificate_issued_date|dt }}
+                {% else %}
+                Сведения не предоставлены
+                {% endif %}
+            </th>
+            <th>
+                {% if line.certificate_status %}
+                {{ line.certificate_status }}
+                {% else %}
+                Сведения не предоставлены
+                {% endif %}
+            </th>
+            <th>
+                {% if line.max_price_per_one_contract %}
+                {{ line.max_price_per_one_contract }}
+                {% else %}
+                Сведения не предоставлены
+                {% endif %}
+            </th>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+<div class="container py-xl-5">
+    <a class="btn btn-primary" href="#">
+        Редактировать запись
+    </a>
+    <a class="btn btn-primary" href="#">
+        Удалить запись
+    </a>
+</div>
+{% endblock %}

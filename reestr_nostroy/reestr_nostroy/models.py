@@ -25,6 +25,7 @@ class Reestr(Base):
     status = Column('status', Text())
     organization_type = Column('organization_type', Text())
     sro_registration_number = Column('sro_registration_number', Text())
+    comments = Column('comments', Text())
 
 
 class RegistrationDates(Base):

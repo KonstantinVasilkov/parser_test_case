@@ -1,10 +1,100 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}
+<title>
+    Пользовательский интерфейс для парсера сайта https://reestr.nostroy.ru/
+</title>
+{% endblock %}
+
+{% block body %}
+<h1>
+    Список организаций из базы данных
+</h1>
+<br>
+<div class="container">
+    <form method="post" enctype="multipart/form-data">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-12">
+            <div class="search"><i class="fa fa-search"></i>
+                <label>
+                    <input type="text"
+                           name="inn"
+                           class="form-control"
+                           placeholder="Введите Инн">
+                </label>
+                <button type="submit" class="btn btn-primary" >Поиск</button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+<table id="main_table" class="table table-striped">
+    <thead class="thead-dark text-decoration-underline">
+    <tr>
+        <th scope="col">
+            Название организации
+        </th>
+        <th scope="col">
+            ИНН организации
+        </th>
+        <th scope="col">
+            Регистрационный номер СРО
+        </th>
+        <th scope="col">
+            Статус членства в СРО
+        </th>
+    </tr>
+    </thead>
+    {% for organization in organizations.items %}
+    <tr>
+        <th>
+            <a href="details/{{ organization.uid }}">
+                {{ organization.short_name_of_sro_member }}
+            </a>
+
+        </th>
+        <th>
+            {{ organization.inn }}
+        </th>
+        <th>
+            {{ organization.sro_registration_number }}
+        </th>
+        <th>
+            {{ organization.status }}
+        </th>
+    </tr>
+    {% endfor %}
+</table>
+
+{% if organizations.has_prev %}
+<a href="{{ url_for('index', page = organizations.prev_num) }}">
+    << Предыдущая страница
+</a>
+{% else %}
+<< Предыдущая страница
+{% endif %}
+|
+{% if organizations.has_next %}
+<a href="{{ url_for('index', page = organizations.next_num) }}">
+    Следующая страница >>
+</a>
+{% else %}
+Следующая страница >>
+{% endif %}
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    $(document).ready(function () {
+        $('#data').DataTable({
+            columns: [
+                null,
+                {searchable: false},
+                {orderable: false, searchable: false},
+                {orderable: false, searchable: false},
+                null],
+        });
+    });
+</script>
+{% endblock %}

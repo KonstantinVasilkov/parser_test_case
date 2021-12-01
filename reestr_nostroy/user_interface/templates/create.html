@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>
+    Ручное добавление записей в базу данных
+</title>
+{% endblock %}
+
+{% block body %}
+<h1>
+    Ручное добавление записей в базу данных
+</h1>
+<div class="card">
+    <div class="card-header">Добавить запись в базу</div>
+    <form method="post">
+        <br>
+        <input type="text" class="form-label" name="inn" id="inn"
+               placeholder="Введите ИНН"><br>
+        <button class="btn-success" type="submit">Добавить запись</button>
+    </form>
+</div>
+{% endblock %}
